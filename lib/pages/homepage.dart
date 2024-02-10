@@ -1,22 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:function_tree/function_tree.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Calculator',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Homepage(),
-    );
-  }
-}
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -29,6 +13,25 @@ class _HomepageState extends State<Homepage> {
   String input = "0";
   String output = "";
 
+  void onTap(String text){
+    setState(() {
+
+      if(text=='AC'){
+        input='0';
+        output='0';
+      }
+      else if(text=='⌫'){
+        input=input.substring(0,input.length-1);
+      }
+      else if(text=='×' || text =='÷' || text=='+'){
+        (input=='0')?input='0':input+=text;
+      }
+      else{
+        (input=='0')?input=text:input+=text;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +41,6 @@ class _HomepageState extends State<Homepage> {
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.045),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.4,
-            color: const Color.fromARGB(255, 234, 234, 234),
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -46,7 +48,8 @@ class _HomepageState extends State<Homepage> {
               children: [
                 Text(
                   input,
-                  style: TextStyle(fontSize: (input.length <= 36) ? MediaQuery.of(context).size.height * 0.07 : MediaQuery.of(context).size.height * 0.05),
+                  style: TextStyle(fontSize: (input.length < 36) ? MediaQuery.of(context).size.height * 0.07 : MediaQuery.of(context).size.height * 0.05),
+                  maxLines: 5,
                 ),
                 const SizedBox(
                   height: 10,
@@ -54,6 +57,7 @@ class _HomepageState extends State<Homepage> {
                 Text(
                   output,
                   style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.05, color: Colors.black.withOpacity(0.6)),
+                  maxLines: 1,
                 ),
                 const SizedBox(
                   height: 10,
@@ -70,48 +74,27 @@ class _HomepageState extends State<Homepage> {
                     Mbutton(
                       text: "AC",
                       operator: true,
-                      onPressed: () {
-                        setState(() {
-                          input = '0';
-                          output = '0';
-                        });
-                      },
+                      onPressed: () {onTap("AC");},
                     ),
                     Mbutton(
                       text: "7",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '7';
-                        });
-                      },
+                      onPressed: () {onTap("7");},
                     ),
                     Mbutton(
                       text: "4",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '4';
-                        });
-                      },
+                      onPressed: () {onTap("4");},
                     ),
                     Mbutton(
                       text: "1",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '1';
-                        });
-                      },
+                      onPressed: () {onTap("1");},
                     ),
                     Mbutton(
                       text: "00",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '00';
-                        });
-                      },
+                      onPressed: () {onTap("00");},
                     ),
                   ],
                 ),
@@ -120,49 +103,27 @@ class _HomepageState extends State<Homepage> {
                     Mbutton(
                       text: "⌫",
                       operator: true,
-                      onPressed: () {
-                        setState(() {
-                          if (input.isNotEmpty) {
-                            input = input.substring(0, input.length - 1);
-                          }
-                        });
-                      },
+                      onPressed: () {onTap("⌫");},
                     ),
                     Mbutton(
                       text: "8",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '8';
-                        });
-                      },
+                      onPressed: () {onTap("8");},
                     ),
                     Mbutton(
                       text: "5",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '5';
-                        });
-                      },
+                      onPressed: () {onTap("5");},
                     ),
                     Mbutton(
                       text: "2",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '2';
-                        });
-                      },
+                      onPressed: () {onTap("2");},
                     ),
                     Mbutton(
                       text: "0",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '0';
-                        });
-                      },
+                      onPressed: () {onTap("0");},
                     ),
                   ],
                 ),
@@ -171,47 +132,27 @@ class _HomepageState extends State<Homepage> {
                     Mbutton(
                       text: "÷",
                       operator: true,
-                      onPressed: () {
-                        setState(() {
-                          input += '/';
-                        });
-                      },
+                      onPressed: () {onTap("÷");},
                     ),
                     Mbutton(
                       text: "9",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '9';
-                        });
-                      },
+                      onPressed: () {onTap("9");},
                     ),
                     Mbutton(
                       text: "6",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '6';
-                        });
-                      },
+                      onPressed: () {onTap("6");},
                     ),
                     Mbutton(
                       text: "3",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '3';
-                        });
-                      },
+                      onPressed: () {onTap("3");},
                     ),
                     Mbutton(
                       text: ".",
                       operator: false,
-                      onPressed: () {
-                        setState(() {
-                          input += '.';
-                        });
-                      },
+                      onPressed: () {onTap(".");},
                     ),
                   ],
                 ),
@@ -220,29 +161,17 @@ class _HomepageState extends State<Homepage> {
                     Mbutton(
                       text: "×",
                       operator: true,
-                      onPressed: () {
-                        setState(() {
-                          input += '*';
-                        });
-                      },
+                      onPressed: () {onTap("×");},
                     ),
                     Mbutton(
                       text: "-",
                       operator: true,
-                      onPressed: () {
-                        setState(() {
-                          input += '-';
-                        });
-                      },
+                      onPressed: () {onTap("-");},
                     ),
                     Mbutton(
                       text: "+",
                       operator: true,
-                      onPressed: () {
-                        setState(() {
-                          input += '+';
-                        });
-                      },
+                      onPressed: () {onTap("+");}
                     ),
                     Specialbutton(
                       text: "=",
@@ -252,6 +181,8 @@ class _HomepageState extends State<Homepage> {
                       onPressed: () {
                         setState(() {
                           var userInput = input;
+                          userInput=userInput.replaceAll('×', '*');
+                          userInput=userInput.replaceAll('÷', '/');
                           String temp = userInput.substring(userInput.length - 1, userInput.length);
                           ((temp == '+' || temp == '-' || temp == '×' || temp == '÷'))
                               ? output = "Error!"
@@ -288,7 +219,7 @@ class Mbutton extends StatelessWidget {
       margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: operator ? Colors.blueAccent : Colors.white,
+          backgroundColor: operator ? Colors.blueAccent : Color.fromARGB(255, 249, 249, 249),
           shape: const CircleBorder(),
           fixedSize: Size(MediaQuery.of(context).size.width * 0.21, MediaQuery.of(context).size.width * 0.21),
         ),
@@ -327,6 +258,7 @@ class Specialbutton extends StatelessWidget {
       margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          elevation: 20,
           backgroundColor: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
