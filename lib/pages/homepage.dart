@@ -21,13 +21,32 @@ class _HomepageState extends State<Homepage> {
         output='';
       }
       else if(text=='⌫'){
-        (input=='0')?input='0':input=input.substring(0,input.length-1);
+        if(input.isNotEmpty) {
+          input=input.substring(0,input.length-1);
+          if(input[input.length-1]!='+' && input[input.length-1]!='×' && input[input.length-1]!='÷' &&input[input.length-1]!='-' ){
+            var userInput = input.substring(0,input.length-1);
+            userInput=userInput.replaceAll('×', '*');
+            userInput=userInput.replaceAll('÷', '/');
+            output = "${userInput.interpret()}";
+            }
+            else{
+              var userInput = input;
+              userInput=userInput.replaceAll('×', '*');
+              userInput=userInput.replaceAll('÷', '/');
+              output = "${userInput.interpret()}";
+            }
+        }
       }
       else if(text=='00'){
-        (input=='0' || input=='')?input='0':input+=text;
+        if(input!='0' && input.isNotEmpty){
+          input+=text;
+          var userInput = input;
+          userInput=userInput.replaceAll('×', '*');
+          userInput=userInput.replaceAll('÷', '/');
+          output = "${userInput.interpret()}";
+        }
       }
       else if(text=='×' || text =='÷' || text=='+' || text=='-'){
-        // (input=='0')?input='0':input+=text;
         if(input!='0' && input.isNotEmpty){
           if(input[input.length-1]!='+' && input[input.length-1]!='×' && input[input.length-1]!='÷' &&input[input.length-1]!='-' ){
             input+=text;
@@ -207,6 +226,7 @@ class _HomepageState extends State<Homepage> {
                       color: const Color.fromARGB(255, 255, 162, 0),
                       onPressed: () {
                         setState(() {
+                          if(input.isNotEmpty){
                           var userInput = input;
                           userInput=userInput.replaceAll('×', '*');
                           userInput=userInput.replaceAll('÷', '/');
@@ -214,6 +234,7 @@ class _HomepageState extends State<Homepage> {
                           ((temp == '+' || temp == '-' || temp == '×' || temp == '÷'))
                               ? output = "Error!"
                               : output = "${userInput.interpret()}";
+                          }
                         });
                       },
                     ),
