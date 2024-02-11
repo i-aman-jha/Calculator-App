@@ -11,25 +11,24 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  String input = "0";
+  String input = "";
   String output = "";
 
   void onTap(String text){
     setState(() {
-
       if(text=='AC'){
-        input='0';
-        output='0';
+        input='';
+        output='';
       }
       else if(text=='⌫'){
         (input=='0')?input='0':input=input.substring(0,input.length-1);
       }
       else if(text=='00'){
-        (input=='0')?input='0':input+=text;
+        (input=='0' || input=='')?input='0':input+=text;
       }
       else if(text=='×' || text =='÷' || text=='+' || text=='-'){
         // (input=='0')?input='0':input+=text;
-        if(input!='0'){
+        if(input!='0' && input.isNotEmpty){
           if(input[input.length-1]!='+' && input[input.length-1]!='×' && input[input.length-1]!='÷' &&input[input.length-1]!='-' ){
             input+=text;
           }
@@ -47,7 +46,15 @@ class _HomepageState extends State<Homepage> {
         }
       }
       else{
-        (input=='0')?input=text:input+=text;
+        if(input=='0' || input.isEmpty) {
+          input=text;
+        } else{
+          input+=text;
+          var userInput = input;
+          userInput=userInput.replaceAll('×', '*');
+          userInput=userInput.replaceAll('÷', '/');
+          output = "${userInput.interpret()}";
+        }
       }
     });
   }
