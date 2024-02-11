@@ -22,10 +22,29 @@ class _HomepageState extends State<Homepage> {
         output='0';
       }
       else if(text=='⌫'){
-        input=input.substring(0,input.length-1);
+        (input=='0')?input='0':input=input.substring(0,input.length-1);
       }
-      else if(text=='×' || text =='÷' || text=='+'){
+      else if(text=='00'){
         (input=='0')?input='0':input+=text;
+      }
+      else if(text=='×' || text =='÷' || text=='+' || text=='-'){
+        // (input=='0')?input='0':input+=text;
+        if(input!='0'){
+          if(input[input.length-1]!='+' && input[input.length-1]!='×' && input[input.length-1]!='÷' &&input[input.length-1]!='-' ){
+            input+=text;
+          }
+          else{
+            if(input[input.length-1]!=text && input.length!=1){
+              input=input.substring(0,input.length-1);
+              input+=text;
+            }
+          }
+        }
+        else{
+          if(text=='-'){
+            input=text;
+          }
+        }
       }
       else{
         (input=='0')?input=text:input+=text;
