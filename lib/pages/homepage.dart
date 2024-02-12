@@ -1,6 +1,8 @@
-import 'package:calculator/utilities/button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:function_tree/function_tree.dart';
+
+import '../utilities/button.dart';
 
 
 class Homepage extends StatefulWidget {
@@ -23,18 +25,6 @@ class _HomepageState extends State<Homepage> {
       else if(text=='⌫'){
         if(input.isNotEmpty) {
           input=input.substring(0,input.length-1);
-          if(input[input.length-1]!='+' && input[input.length-1]!='×' && input[input.length-1]!='÷' &&input[input.length-1]!='-' ){
-            var userInput = input.substring(0,input.length-1);
-            userInput=userInput.replaceAll('×', '*');
-            userInput=userInput.replaceAll('÷', '/');
-            output = "${userInput.interpret()}";
-            }
-            else{
-              var userInput = input;
-              userInput=userInput.replaceAll('×', '*');
-              userInput=userInput.replaceAll('÷', '/');
-              output = "${userInput.interpret()}";
-            }
         }
       }
       else if(text=='00'){
@@ -227,13 +217,13 @@ class _HomepageState extends State<Homepage> {
                       onPressed: () {
                         setState(() {
                           if(input.isNotEmpty){
-                          var userInput = input;
-                          userInput=userInput.replaceAll('×', '*');
-                          userInput=userInput.replaceAll('÷', '/');
-                          String temp = userInput.substring(userInput.length - 1, userInput.length);
-                          ((temp == '+' || temp == '-' || temp == '×' || temp == '÷'))
-                              ? output = "Error!"
-                              : output = "${userInput.interpret()}";
+                            var userInput = input;
+                            userInput=userInput.replaceAll('×', '*');
+                            userInput=userInput.replaceAll('÷', '/');
+                            String temp = userInput.substring(userInput.length - 1, userInput.length);
+                            ((temp == '+' || temp == '-' || temp == '×' || temp == '÷'))
+                                ? output = "Error!"
+                                : output = "${userInput.interpret()}";
                           }
                         });
                       },
