@@ -1,7 +1,5 @@
-
+import 'package:calculator/pages/homepage.dart';
 import 'package:flutter/material.dart';
-
-import 'pages/homepage.dart';
 
 void main(){
   runApp(const MyApp());
@@ -21,7 +19,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       
       home:const Homepage(),
-      theme: ThemeData(scaffoldBackgroundColor: const Color.fromARGB(255, 234, 234, 234)),
+      theme: ThemeData(scaffoldBackgroundColor: const Color.fromARGB(255, 234, 234, 234),appBarTheme: const AppBarTheme(color: Colors.transparent)),
     );
   }
 }

@@ -18,7 +18,7 @@ class Mbutton extends StatelessWidget {
       margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: operator ? Colors.blueAccent : Color.fromARGB(255, 249, 249, 249),
+          backgroundColor: operator ? Colors.blueAccent : const Color.fromARGB(255, 249, 249, 249),
           shape: const CircleBorder(),
           fixedSize: Size(MediaQuery.of(context).size.width * 0.21, MediaQuery.of(context).size.width * 0.21),
         ),
@@ -54,7 +54,7 @@ class Specialbutton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.025),
+      margin: EdgeInsets.all(MediaQuery.of(context).size.width * 0.01),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 20,
@@ -69,6 +69,39 @@ class Specialbutton extends StatelessWidget {
           text,
           style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0), fontSize: MediaQuery.of(context).size.width * 0.07),
         ),
+      ),
+    );
+  }
+}
+
+
+class MyIconButton extends StatefulWidget {
+  final IconData icon;
+  final Color color;
+  final VoidCallback? onPressed;
+
+  MyIconButton({super.key,
+    required this.icon,
+    required this.color,
+    required this.onPressed,
+  });
+
+  @override
+  State<MyIconButton> createState() => _MyIconButtonState();
+}
+
+class _MyIconButtonState extends State<MyIconButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      shape: const CircleBorder(),
+      elevation: 10,
+      color: widget.color,
+      child: IconButton(
+        iconSize: MediaQuery.of(context).size.height*0.06,
+        icon: Icon(widget.icon,),
+        onPressed: widget.onPressed,
+        color: Colors.black,
       ),
     );
   }
