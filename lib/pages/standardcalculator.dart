@@ -75,7 +75,7 @@ class _HomepageState extends State<StandardCalc> {
             userInput=userInput.replaceAll('×', '*');
             userInput=userInput.replaceAll('÷', '/');
             String temp = userInput.substring(userInput.length - 1, userInput.length);
-            ((temp == '+' || temp == '-' || temp == '×' || temp == '÷'))
+            ((temp == '+' || temp == '-' || temp == '*' || temp == '/'))
                 ? output = "Error!"
                 : output = "${userInput.interpret()}";
           }
