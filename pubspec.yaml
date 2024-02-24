@@ -35,7 +35,6 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   dropdown_button2: ^2.3.9
   units_converter: ^3.0.0
-  # money_converter: ^2.0.2
   currency_converter: ^0.0.5
 
 
